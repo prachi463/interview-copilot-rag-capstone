@@ -10,3 +10,4 @@ python-dotenv
 groq
 openai
 sentence-transformers
+gunicorn
