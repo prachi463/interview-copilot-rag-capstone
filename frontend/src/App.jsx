@@ -5,6 +5,55 @@ import './index.css'
 export default function App() {
   const [activeSection, setActiveSection] = useState('chat')
 
+  const renderContent = () => {
+    if (activeSection === 'chat') {
+      return <ChatInterface />
+    } else if (activeSection === 'about') {
+      return (
+        <div style={{ padding: '2rem', color: '#edeff2', overflowY: 'auto' }}>
+          <h1 style={{ color: '#e8a33d', marginBottom: '1rem' }}>About Me</h1>
+          <p style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+            I'm a final-year B.Tech CSE (AI/ML) student at Axis Institute of Technology, Kanpur.
+          </p>
+          <p style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+            <strong>CGPA:</strong> 8.4/10 | <strong>Class Representative:</strong> 60+ students
+          </p>
+          <h3 style={{ color: '#c1666b', marginTop: '2rem', marginBottom: '1rem' }}>Internships</h3>
+          <p style={{ fontSize: '1rem', lineHeight: 1.8, marginBottom: '0.5rem' }}>• NTPC Limited, Auraiya (AI/ML, June-July 2026)</p>
+          <p style={{ fontSize: '1rem', lineHeight: 1.8 }}>• EduSkills Foundation (Python Full-Stack, Jan-Mar 2026)</p>
+        </div>
+      )
+    } else if (activeSection === 'projects') {
+      return (
+        <div style={{ padding: '2rem', color: '#edeff2', overflowY: 'auto' }}>
+          <h1 style={{ color: '#e8a33d', marginBottom: '1rem' }}>Projects</h1>
+          <div style={{ marginBottom: '2rem' }}>
+            <h3 style={{ color: '#c1666b', marginBottom: '0.5rem' }}>UNIT-CTRL - Predictive Maintenance</h3>
+            <p style={{ fontSize: '1rem', lineHeight: 1.6 }}>LSTM-based system using Flask, React, MongoDB. 99.28% accuracy, 0.9997 AUC.</p>
+          </div>
+          <div style={{ marginBottom: '2rem' }}>
+            <h3 style={{ color: '#c1666b', marginBottom: '0.5rem' }}>Interview Copilot - RAG Capstone</h3>
+            <p style={{ fontSize: '1rem', lineHeight: 1.6 }}>Full-stack RAG with hybrid retrieval, query routing, and LLM generation.</p>
+          </div>
+          <div>
+            <h3 style={{ color: '#c1666b', marginBottom: '0.5rem' }}>House Price Prediction</h3>
+            <p style={{ fontSize: '1rem', lineHeight: 1.6 }}>Linear regression with Streamlit deployment. 87% accuracy.</p>
+          </div>
+        </div>
+      )
+    } else if (activeSection === 'contact') {
+      return (
+        <div style={{ padding: '2rem', color: '#edeff2', overflowY: 'auto' }}>
+          <h1 style={{ color: '#e8a33d', marginBottom: '2rem' }}>Contact</h1>
+          <p style={{ fontSize: '1.1rem', lineHeight: 2 }}><strong>Email:</strong> vermaprachi463@gmail.com</p>
+          <p style={{ fontSize: '1.1rem', lineHeight: 2 }}><strong>GitHub:</strong> github.com/prachi463</p>
+          <p style={{ fontSize: '1.1rem', lineHeight: 2 }}><strong>LinkedIn:</strong> linkedin.com/in/prachi-verma-aiml</p>
+          <p style={{ fontSize: '1.1rem', lineHeight: 2 }}><strong>Portfolio:</strong> portfolio-seven-hazel-14.vercel.app</p>
+        </div>
+      )
+    }
+  }
+
   return (
     <div style={{
       width: '100%',
@@ -14,21 +63,19 @@ export default function App() {
       flexDirection: 'column',
       overflow: 'hidden'
     }}>
-      {/* Navigation Bar */}
-      <nav style={{
+      {/* Navigation */}
+      <div style={{
         background: 'rgba(11, 15, 20, 0.95)',
         borderBottom: '1px solid #22303b',
         padding: '1rem 2rem',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        backdropFilter: 'blur(10px)',
-        zIndex: 100
+        alignItems: 'center'
       }}>
         <div style={{ color: '#e8a33d', fontSize: '1.2rem', fontWeight: 700, cursor: 'pointer' }} onClick={() => setActiveSection('chat')}>
           Interview Copilot
         </div>
-        <div style={{ display: 'flex', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', gap: '1rem' }}>
           <button onClick={() => setActiveSection('chat')} style={{
             background: activeSection === 'chat' ? '#e8a33d' : 'transparent',
             color: activeSection === 'chat' ? '#0b0f14' : '#edeff2',
@@ -36,7 +83,6 @@ export default function App() {
             padding: '0.5rem 1rem',
             borderRadius: '4px',
             cursor: 'pointer',
-            fontSize: '0.9rem',
             fontWeight: activeSection === 'chat' ? 600 : 400
           }}>Chat</button>
           <button onClick={() => setActiveSection('about')} style={{
@@ -46,7 +92,6 @@ export default function App() {
             padding: '0.5rem 1rem',
             borderRadius: '4px',
             cursor: 'pointer',
-            fontSize: '0.9rem',
             fontWeight: activeSection === 'about' ? 600 : 400
           }}>About</button>
           <button onClick={() => setActiveSection('projects')} style={{
@@ -56,7 +101,6 @@ export default function App() {
             padding: '0.5rem 1rem',
             borderRadius: '4px',
             cursor: 'pointer',
-            fontSize: '0.9rem',
             fontWeight: activeSection === 'projects' ? 600 : 400
           }}>Projects</button>
           <button onClick={() => setActiveSection('contact')} style={{
@@ -66,74 +110,15 @@ export default function App() {
             padding: '0.5rem 1rem',
             borderRadius: '4px',
             cursor: 'pointer',
-            fontSize: '0.9rem',
             fontWeight: activeSection === 'contact' ? 600 : 400
           }}>Contact</button>
         </div>
-      </nav>
+      </div>
 
-      {/* Chat Section */}
-      {activeSection === 'chat' && <ChatInterface />}
-
-      {/* About Section */}
-      {activeSection === 'about' && (
-        <div style={{ flex: 1, padding: '2rem', color: '#edeff2', overflow: 'auto', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-          <h1 style={{ color: '#e8a33d' }}>About Me</h1>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
-            I'm a final-year B.Tech CSE (AI/ML) student at Axis Institute of Technology, Kanpur (affiliated with AKTU).
-          </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
-            <strong>CGPA:</strong> 8.4/10 | <strong>Class Representative:</strong> 60+ students
-          </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
-            <strong>Internships:</strong>
-          </p>
-          <ul style={{ fontSize: '1rem', lineHeight: 1.8 }}>
-            <li>NTPC Limited, Auraiya (AI/ML, June-July 2026)</li>
-            <li>EduSkills Foundation (Python Full-Stack Developer, Jan-Mar 2026)</li>
-          </ul>
-        </div>
-      )}
-
-      {/* Projects Section */}
-      {activeSection === 'projects' && (
-        <div style={{ flex: 1, padding: '2rem', color: '#edeff2', overflow: 'auto', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-          <h1 style={{ color: '#e8a33d' }}>Projects</h1>
-          <div style={{ marginBottom: '2rem' }}>
-            <h3 style={{ color: '#c1666b' }}>UNIT-CTRL - Predictive Maintenance System</h3>
-            <p>LSTM-based predictive maintenance using Flask, React, Socket.IO, MongoDB Atlas. 99.28% accuracy, 0.9997 AUC.</p>
-            <p><strong>Tech:</strong> Python, TensorFlow, Flask, React, MongoDB, ESP32, Render, Vercel</p>
-          </div>
-          <div style={{ marginBottom: '2rem' }}>
-            <h3 style={{ color: '#c1666b' }}>Interview Copilot - RAG Capstone</h3>
-            <p>Full-stack RAG application with hybrid retrieval (FAISS + BM25), query routing, and LLM generation.</p>
-            <p><strong>Tech:</strong> Flask, React, FAISS, Groq API, Render, Vercel</p>
-          </div>
-          <div>
-            <h3 style={{ color: '#c1666b' }}>House Price Prediction</h3>
-            <p>Linear regression model with Streamlit deployment. Achieved 87% accuracy on test data.</p>
-          </div>
-        </div>
-      )}
-
-      {/* Contact Section */}
-      {activeSection === 'contact' && (
-        <div style={{ flex: 1, padding: '2rem', color: '#edeff2', overflow: 'auto', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-          <h1 style={{ color: '#e8a33d' }}>Contact</h1>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            <strong>Email:</strong> <a href="mailto:vermaprachi463@gmail.com" style={{ color: '#e8a33d', textDecoration: 'none' }}>vermaprachi463@gmail.com</a>
-          </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            <strong>GitHub:</strong> <a href="https://github.com/prachi463" style={{ color: '#e8a33d', textDecoration: 'none' }} target="_blank" rel="noreferrer">github.com/prachi463</a>
-          </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/prachi-verma-aiml" style={{ color: '#e8a33d', textDecoration: 'none' }} target="_blank" rel="noreferrer">linkedin.com/in/prachi-verma-aiml</a>
-          </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            <strong>Portfolio:</strong> <a href="https://portfolio-seven-hazel-14.vercel.app" style={{ color: '#e8a33d', textDecoration: 'none' }} target="_blank" rel="noreferrer">portfolio-seven-hazel-14.vercel.app</a>
-          </p>
-        </div>
-      )}
+      {/* Content Area */}
+      <div style={{ flex: 1, overflowY: 'auto' }}>
+        {renderContent()}
+      </div>
     </div>
   )
 }
