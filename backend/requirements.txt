@@ -1,0 +1,12 @@
+flask
+flask-cors
+numpy
+scikit-learn
+faiss-cpu
+rank_bm25
+pypdf
+python-docx
+python-dotenv
+groq
+openai
+sentence-transformers
