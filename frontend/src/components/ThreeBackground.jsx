@@ -110,11 +110,15 @@ export default function ThreeBackground() {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-      renderer.dispose();
-      mountRef.current?.removeChild(renderer.domElement);
-    };
+  window.removeEventListener('resize', handleResize);
+  cancelAnimationFrame(animationFrameId);
+  if (renderer) {
+    renderer.dispose();
+  }
+  if (mountRef.current && renderer.domElement && renderer.domElement.parentNode ===        mountRef.current) {
+    mountRef.current.removeChild(renderer.domElement);
+    }
+   };
   }, []);
 
   return <div ref={mountRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 0 }} />;
